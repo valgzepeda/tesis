@@ -10,8 +10,7 @@ function resta = Ensamble(K_array_correc,avg)
         resta(:,:,i) = K_array_correc(:,:,i)-avg;
     end
 
-end
-
+end 
     resta1 = Ensamble(K1_array_correc,avg1);
     resta2 = Ensamble(K2_array_correc,avg2); 
 
