@@ -1,5 +1,5 @@
 
-dataprep; %Ejecuta el archivo dataprep que extrae los dicom a una celda por kernel
+prepdata; %Ejecuta el archivo dataprep que extrae los dicom a una celda por kernel
 %% Función Selección de cortes NPS 
 
 % Rango de cortes a usar 

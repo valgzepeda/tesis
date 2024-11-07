@@ -48,11 +48,11 @@ function npsTotal = Calcularnps(Padtotal)
 
 Dft_total = zeros(size(Padtotal,1),size(Padtotal,2));
 
-for i = 1:size(Padtotal,3)
-Dft_total(:,:,i) = (abs(fftshift(fft2(Padtotal(:,:,i))))).^2;
-end
+    for i = 1:size(Padtotal,3)
+        Dft_total(:,:,i) = (abs(fftshift(fft2(Padtotal(:,:,i))))).^2;
+    end
 
-npsTotal = mean(Dft_total,3); %Así viene en el paper  
+npsTotal = mean(Dft_total,3);  
 
 end
 
@@ -83,7 +83,7 @@ ylabel('Pixel')
 
 PixelSize = 0.4454;
 
-function Norma = Normalizarnps(K_array_correc,npsTotal)
+function [Norma,NPS] = Normalizarnps(K_array_correc,npsTotal)
 
 PixelSize = 0.4454;
 [dimX,~] = size(npsTotal); 
@@ -93,10 +93,12 @@ varianza = var(K_array_correc(231:280,231:280,10), 0, 'all');
 sumatoria = sum(npsTotal(:));
 
 Norma = (varianza*(dimX*PixelSize)^2)/sumatoria;
+
+NPS = Norma.*npsTotal;
 end
 
-Norma1 = Normalizarnps(K1_array_correc,npsTotal_K1);
-Norma2 = Normalizarnps(K2_array_correc,npsTotal_K2);
+[Norma1,NPS1] = Normalizarnps(K1_array_correc,npsTotal_K1);
+[Norma2,NPS2] = Normalizarnps(K2_array_correc,npsTotal_K2);
 
 % Mostrar el valor
 disp(['El valor de la norma correspondiente al kernel 1 es: ', num2str(Norma1), ]);
@@ -110,7 +112,6 @@ disp(['El valor de la norma prima es: ', num2str(Norma_prima), ]);
 
 % Mostrar el valor
 disp(['El valor de la norma correspondiente al kernel 2 es: ', num2str(Norma2), ]);
-
 
 
 %% Cálculo de frecuencia espacial 
